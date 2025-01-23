@@ -27,3 +27,11 @@ export const fetchSaveDetails = async (saveName) => {
     throw error;
   }
 };
+
+export const fetchRSIData = async () => {
+  const response = await fetch(`http://57.129.5.163:5000/rsi`)
+  if (!response.ok) {
+    throw new Error("Erreur pour récupérer les données RSI")
+  }
+  return await response.json();
+};

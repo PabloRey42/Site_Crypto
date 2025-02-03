@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL || "http://57.129.5.163:5000";
+const API_URL = process.env.REACT_APP_API_URL || "https://bot.crypteau.fr:5000";
 
 export const fetchSaves = async () => {
   try {
@@ -29,7 +29,7 @@ export const fetchSaveDetails = async (saveName) => {
 };
 
 export const fetchRSIData = async () => {
-  const response = await fetch(`http://57.129.5.163:5000/rsi`)
+  const response = await fetch(`https://bot.crypteau.fr:5000/rsi`)
   if (!response.ok) {
     throw new Error("Erreur pour récupérer les données RSI")
   }

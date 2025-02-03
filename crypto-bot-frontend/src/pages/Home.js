@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { fetchSaves, fetchSaveDetails, fetchRSIData } from "../utils/api";
 import SaveList from "../components/SaveList";
 import SaveDetails from "../components/SaveDetails";
+import PortfolioChart from "../components/PortfolioChart";
+
 
 const Home = () => {
   const [saves, setSaves] = useState([]); // Liste des sauvegardes
@@ -62,6 +64,10 @@ const Home = () => {
 
   return (
     <div>
+      <h1 className="text-3xl font-bold text-center text-blue-600 mb-5">
+      🍆 Alexandre suce ma bite
+      </h1>
+
       {/* Afficher un message d'erreur si nécessaire */}
       {error && <p style={{ color: "red" }}>{error}</p>}
       
@@ -69,8 +75,12 @@ const Home = () => {
       <SaveList saves={saves} onSelect={handleSelectSave} />
       
       {/* Détails de la sauvegarde sélectionnée */}
-      {selectedSave && <SaveDetails save={selectedSave} />}
-
+      {selectedSave && (
+        <div>
+          <SaveDetails save={selectedSave} />
+          <PortfolioChart portfolio={selectedSave.portfolio} />
+        </div>
+      )}
       {/* Section des données RSI */}
       <div style={{ marginTop: "20px" }}>
         <h2>Données RSI des Cryptos</h2>

@@ -1,0 +1,108 @@
+/* Login.css - Effet verre (Glassmorphism) */
+:root {
+    --background-image: url('./assets/3673457.jpg'); /* Image de fond par défaut */
+}
+
+body {
+    background: var(--background-image) center/cover no-repeat;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Conteneur du formulaire */
+.login-container {
+    background: rgba(255, 255, 255, 0.2); /* Transparence */
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    text-align: center;
+    backdrop-filter: blur(10px); /* Effet verre */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Titre */
+.login-container h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    color: #1e293b;
+    font-weight: bold;
+}
+
+/* Champs de saisie */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #1e293b;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    color: #1e293b;
+    font-size: 16px;
+    transition: 0.3s;
+    outline: none;
+    box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+.input-group input:focus {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* Bouton */
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #1e293b, #334155);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background: linear-gradient(90deg, #334155, #1e293b);
+    transform: scale(1.05);
+}
+
+/* Options supplémentaires */
+.options {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #1e293b;
+    margin-top: 10px;
+}
+
+.options a {
+    text-decoration: none;
+    color: #334155;
+    font-weight: bold;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    font-weight: bold;
+}

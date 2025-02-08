@@ -27,3 +27,17 @@ export const fetchSaveDetails = async (saveName) => {
     throw error;
   }
 };
+
+export const fetchRSIData = async () => {
+  try {
+    const response = await fetch(`${API_URL}/rsi`);
+    if (!response.ok) {
+      throw new Error("Erreur lors du chargement des données RSI");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Erreur API fetchRSIData :", error);
+    throw error;
+  }
+};
+

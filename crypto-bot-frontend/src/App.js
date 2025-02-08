@@ -1,23 +1,15 @@
-import React, { useState } from "react";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login"; // Import de la page login
 
-const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const handleLogin = () => {
-    setIsAuthenticated(true);
-  };
-
+function App() {
   return (
-    <div>
-      <Navbar />
-      <div style={{ padding: "20px" }}>
-        {isAuthenticated ? <Home /> : <Login onLogin={handleLogin} />}
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        {/* Ajoute d'autres routes ici */}
+      </Routes>
+    </Router>
   );
-};
+}
 
 export default App;

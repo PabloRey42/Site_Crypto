@@ -1,0 +1,107 @@
+/* Dashboard.css */
+body {
+    background: url('./assets/3673457.jpg') center/cover no-repeat fixed;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+/* Conteneur principal */
+.dashboard {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 80px 20px 20px; /* Plus d'espace en haut */
+}
+
+/* En-tête du Dashboard */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-top: 20px;
+}
+
+.dashboard-header h1 {
+    font-size: 32px;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Section principale */
+.dashboard-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* Conteneur pour chaque section */
+.dashboard-section {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* Conteneur du tableau RSI pour éviter qu'il prenne toute la place */
+.rsi-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Tableau RSI */
+.rsi-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.rsi-table th, .rsi-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.rsi-table th {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Permet de défiler seulement si besoin */
+.rsi-table tbody {
+    display: block;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.rsi-table thead, .rsi-table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.rsi-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Message d'erreur */
+.error-message {
+    color: red;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Texte des détails de la sauvegarde en noir */
+.save-details {
+    color: black;
+    font-weight: bold;
+}
+
+/* Si aucune donnée RSI */
+.no-data {
+    font-size: 14px;
+    color: #ccc;
+}

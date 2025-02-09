@@ -8,16 +8,11 @@ const Login = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Changer l'image de fond dynamiquement via CSS Variables
-  const backgroundStyle = {
-    "--background-image": "url('/mon-image-de-fond.jpg')",
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     try {
-      const response = await fetch("https://bot.crypteau.fr/api/login", {
+      const response = await fetch("https://bot.crypteau.fr:5000/login", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -42,7 +37,7 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container" style={backgroundStyle}>
+    <div className="login-container">
       <h2>Connexion</h2>
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>

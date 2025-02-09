@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL || "http://57.129.5.163:5000";
+const API_URL = process.env.REACT_APP_API_URL || "https://bot.crypteau.fr:5000";
 
 export const fetchSaves = async () => {
   try {

@@ -14,6 +14,47 @@ export const fetchSaves = async () => {
   }
 };
 
+export const fetchUserProfile = async () => {
+  const response = await fetch("https://bot.crypteau.fr:5000/api/user/profile", {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Utilisateur non authentifié");
+  }
+
+  const data = await response.json();
+  console.log("User data:", data); // 🔥 Ajoute ce log pour voir la réponse de l’API
+  return data;
+};
+
+export const fetchUserCryptos = async () => {
+  const response = await fetch("https://bot.crypteau.fr:5000/api/user/cryptos", {
+    method: "GET",
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    throw new Error("Erreur lors de la récupération des cryptos");
+  }
+
+  return response.json();
+};
+
+export const toggleCryptoStatus = async (crypto) => {
+  const response = await fetch("https://bot.crypteau.fr:5000/api/user/cryptos/toggle", {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ crypto }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Erreur lors du changement de statut");
+  }
+};
+
 export const fetchSaveDetails = async (saveName) => {
   try {
     const response = await fetch(`${API_URL}/save/${saveName}`);

@@ -1,18 +1,20 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
-import Navbar from "./components/Navbar"; // Si tu as une barre de navigation
+import Navbar from "./components/Navbar";
+import Profile from "./pages/profile";
 
 const App = () => {
   return (
     <Router>
-      <Navbar /> {/* Optionnel : Barre de navigation */}
+      <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/profile" element={<Profile />} />
+
       </Routes>
     </Router>
   );

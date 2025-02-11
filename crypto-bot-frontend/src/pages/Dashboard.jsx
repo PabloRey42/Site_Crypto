@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { fetchSaves, fetchSaveDetails, fetchRSIData } from "../utils/api";
+import { fetchSaves, fetchSaveDetails, fetchRSIData, fetchUserProfile } from "../utils/api";
 import SaveList from "../components/SaveList";
 import SaveDetails from "../components/SaveDetails";
+import { useNavigate } from "react-router-dom";
 import "./css/Dashboard.css"; // Import du CSS
 
 const Dashboard = () => {
@@ -9,20 +10,37 @@ const Dashboard = () => {
   const [selectedSave, setSelectedSave] = useState(null); // Détails de la sauvegarde sélectionnée
   const [rsiData, setRsiData] = useState([]); // Données RSI des cryptos
   const [error, setError] = useState(""); // Gestion des erreurs
+  const [user, setUser] = useState(null); // Informations de l'utilisateur
+  const navigate = useNavigate();
 
+  // Vérifie l'authentification et charge les données
   useEffect(() => {
-    const loadSaves = async () => {
+    const checkAuth = async () => {
       try {
-        const data = await fetchSaves();
-        setSaves(data);
+        const userData = await fetchUserProfile();
+        console.log("Profil utilisateur :", userData);
+        setUser(userData);
       } catch (err) {
-        setError(err.message);
+        navigate("/login");
       }
     };
+
+    checkAuth();
     loadSaves();
     loadRSIData();
   }, []);
 
+  // Charge la liste des sauvegardes
+  const loadSaves = async () => {
+    try {
+      const data = await fetchSaves();
+      setSaves(data);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  // Charge les détails d'une sauvegarde spécifique
   const handleSelectSave = async (saveName) => {
     try {
       const save = await fetchSaveDetails(saveName);
@@ -32,6 +50,7 @@ const Dashboard = () => {
     }
   };
 
+  // Charge les données RSI des cryptos
   const loadRSIData = async () => {
     try {
       const data = await fetchRSIData();
@@ -51,7 +70,20 @@ const Dashboard = () => {
 
       {/* En-tête du Dashboard */}
       <header className="dashboard-header">
-        <h1>Tableau de Bord</h1>
+        <div className="header-left">
+          <h1>Tableau de Bord</h1>
+          {user && (
+            <p className="welcome-text">
+              Bienvenue, {user.name} {user.surname} 👋
+              <br />
+              <span className="user-role">Rôle : {user.role}</span>
+            </p>
+          )}
+        </div>
+
+        <button className="settings-btn" onClick={() => navigate("/settings")}>
+          ⚙️ Settings
+        </button>
       </header>
 
       <div className="dashboard-content">
@@ -72,7 +104,7 @@ const Dashboard = () => {
         {/* Tableau RSI */}
         <div className="dashboard-section">
           <h2>Données RSI des Cryptos</h2>
-          <div className="rsi-container"> {/* Nouveau conteneur pour limiter la hauteur */}
+          <div className="rsi-container">
             {rsiData.length > 0 ? (
               <table className="rsi-table">
                 <thead>

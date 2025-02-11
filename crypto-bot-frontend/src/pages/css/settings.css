@@ -1,0 +1,52 @@
+/* Conteneur principal */
+.settings-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Liste des cryptos */
+  .crypto-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .crypto-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  /* Bouton Activer/Désactiver */
+  .toggle-btn {
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    transition: 0.3s;
+  }
+  
+  .toggle-btn.active {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .toggle-btn.inactive {
+    background: #ff3d3d;
+    color: white;
+  }
+  
+  .toggle-btn:hover {
+    transform: scale(1.05);
+  }
+  

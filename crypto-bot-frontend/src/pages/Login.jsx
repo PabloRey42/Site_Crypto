@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./css/Login.css"; // Import du nouveau style
+import "./css/Login.css"; // Import du style
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,25 +12,23 @@ const Login = () => {
     e.preventDefault();
     
     try {
-      const response = await fetch("https://bot.crypteau.fr:5000/login", {
+      const response = await fetch("https://bot.crypteau.fr:5000/login", {  // 🔥 Assure-toi que l'API tourne sur HTTPS sans port spécifique
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
           "Accept": "application/json",
         },
         body: JSON.stringify({ email, password }),
+        credentials: "include"  // 🚀 Important : envoie les cookies avec la requête
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
+        const data = await response.json();
         throw new Error(data.error || "Échec de la connexion");
       }
 
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-
-      navigate("/dashboard");
+      // ✅ Pas besoin de stocker le token, il est dans le cookie HTTP-Only !
+      navigate("/dashboard");  // 🔄 Redirection après connexion
     } catch (err) {
       setError(err.message);
     }

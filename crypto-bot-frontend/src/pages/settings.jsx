@@ -87,7 +87,14 @@ const Settings = () => {
               <span>{crypto.symbol}</span>
               <button
                 onClick={() => toggleCrypto(crypto)}
-                className={crypto.is_active ? "btn-active" : "btn-inactive"}
+                style={{
+                  backgroundColor: crypto.is_active ? "green" : "red",
+                  color: "white",
+                  padding: "8px 12px",
+                  border: "none",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                }}
               >
                 {crypto.is_active ? "Désactiver" : "Activer"}
               </button>
@@ -95,7 +102,19 @@ const Settings = () => {
           ))}
         </ul>
       )}
-      <button className="back-btn" onClick={() => navigate("/dashboard")}>
+      <button
+        className="back-btn"
+        onClick={() => navigate("/dashboard")}
+        style={{
+          backgroundColor: "#007bff",
+          color: "white",
+          padding: "10px 15px",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+          marginTop: "10px",
+        }}
+      >
         Retour au Dashboard
       </button>
     </div>

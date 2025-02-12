@@ -1,52 +1,81 @@
-/* Conteneur principal */
-.settings-container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
+.settings-page {
     text-align: center;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Liste des cryptos */
-  .crypto-list {
+    padding: 40px;
+}
+
+.crypto-list {
     list-style: none;
     padding: 0;
-  }
-  
-  .crypto-item {
+}
+
+.crypto-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15); /* Ajusté pour mieux s'intégrer */
+    padding: 12px 15px;
+    margin: 8px auto;
+    width: 60%;
     border-radius: 8px;
-    margin-bottom: 10px;
-  }
-  
-  /* Bouton Activer/Désactiver */
-  .toggle-btn {
-    padding: 8px 15px;
-    border-radius: 8px;
+    backdrop-filter: blur(10px); /* Effet de verre */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     font-weight: bold;
-    cursor: pointer;
+    font-size: 16px;
+    color: white;
+}
+
+/* Style des boutons d'activation/désactivation */
+.btn-active,
+.btn-inactive {
     border: none;
-    transition: 0.3s;
-  }
-  
-  .toggle-btn.active {
-    background: #4CAF50;
-    color: white;
-  }
-  
-  .toggle-btn.inactive {
-    background: #ff3d3d;
-    color: white;
-  }
-  
-  .toggle-btn:hover {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Effet hover pour les boutons */
+.btn-active:hover,
+.btn-inactive:hover {
     transform: scale(1.05);
-  }
-  
+}
+
+/* Couleurs et états des boutons */
+.btn-active {
+    background-color: #28a745; /* Vert */
+    color: white;
+}
+
+.btn-inactive {
+    background-color: #dc3545; /* Rouge */
+    color: white;
+}
+
+/* Bouton de retour */
+.back-btn {
+    margin-top: 20px;
+    padding: 12px 18px;
+    border: none;
+    background: linear-gradient(45deg, #444, #222);
+    color: white;
+    cursor: pointer;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+/* Effet hover pour le bouton de retour */
+.back-btn:hover {
+    background: linear-gradient(45deg, #555, #333);
+    transform: scale(1.05);
+}
+
+/* Message d'erreur */
+.error-message {
+    color: #ff4444;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}

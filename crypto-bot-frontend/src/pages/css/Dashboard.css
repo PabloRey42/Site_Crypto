@@ -105,3 +105,40 @@ body {
     font-size: 14px;
     color: #ccc;
 }
+
+/* En-tête du Dashboard */
+.dashboard-header {
+    display: flex; /* ✅ Aligner les éléments horizontalement */
+    justify-content: space-between; /* ✅ Espacement entre le titre et le bouton */
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+/* ✅ Ajustement du titre */
+.dashboard-header h1 {
+    font-size: 32px;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    margin: 0;
+}
+
+/* ✅ Bouton Settings */
+.settings-btn {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    display: inline-block; /* ✅ Assurer qu'il soit visible */
+}
+
+.settings-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #0056b3, #004080);
+}

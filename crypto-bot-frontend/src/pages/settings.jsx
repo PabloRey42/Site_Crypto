@@ -1,52 +1,103 @@
 import React, { useState, useEffect } from "react";
-import { fetchUserCryptos, toggleCryptoStatus } from "../utils/api";
-import "./css/Settings.css"; // Assure-toi d'avoir ce fichier CSS
+import { useNavigate } from "react-router-dom";
+import { fetchUserProfile, fetchUserCryptos, addCrypto, removeCrypto } from "../utils/api";
+import "./css/Settings.css";
 
 const Settings = () => {
   const [cryptos, setCryptos] = useState([]);
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
+  // 🔹 Charge le profil utilisateur
   useEffect(() => {
+    const loadUserProfile = async () => {
+      try {
+        const userData = await fetchUserProfile();
+        console.log("✅ Profil utilisateur récupéré :", userData);
+        setUser(userData);
+      } catch (err) {
+        console.error("❌ Erreur chargement profil :", err);
+        navigate("/login");
+      }
+    };
+
+    loadUserProfile();
+  }, [navigate]);
+
+  // 🔹 Charge les cryptos suivies une fois l'utilisateur chargé
+  useEffect(() => {
+    if (!user) {
+      console.error("❌ Aucun utilisateur trouvé, impossible de récupérer les cryptos !");
+      return;
+    }
+
     const loadCryptos = async () => {
       try {
-        const data = await fetchUserCryptos();
-        setCryptos(data);
-      } catch (err) {
-        console.error("Erreur chargement cryptos:", err);
+        console.log(`📡 Récupération des cryptos pour l'utilisateur ID: ${user.user_id}...`);
+        const userCryptos = await fetchUserCryptos(user.user_id);
+        console.log("✅ Cryptos récupérées :", userCryptos);
+        setCryptos(userCryptos || []);
+      } catch (error) {
+        console.error("❌ Erreur chargement cryptos :", error);
+        setError("Erreur lors du chargement des cryptos suivies.");
       }
     };
 
     loadCryptos();
-  }, []);
+  }, [user]);
 
-  const handleToggle = async (crypto) => {
+  // 🔹 Active ou désactive une crypto
+  const toggleCrypto = async (crypto) => {
+    console.log(`🔄 Tentative de changement de statut pour ${crypto.symbol}...`);
+
     try {
-      await toggleCryptoStatus(crypto);
-      setCryptos((prev) =>
-        prev.map((c) =>
-          c.symbol === crypto ? { ...c, is_active: !c.is_active } : c
+      if (crypto.is_active) {
+        await removeCrypto(crypto.symbol);
+      } else {
+        await addCrypto(crypto.symbol);
+      }
+
+      // ✅ Mise à jour de l'état local sans recharger l'API
+      setCryptos((prevCryptos) =>
+        prevCryptos.map((c) =>
+          c.symbol === crypto.symbol ? { ...c, is_active: !c.is_active } : c
         )
       );
+
+      console.log(`✅ Crypto ${crypto.symbol} mise à jour avec succès !`);
     } catch (err) {
-      console.error("Erreur changement de statut:", err);
+      console.error(`❌ Erreur toggle crypto :`, err);
+      setError("Erreur lors du changement de statut de la crypto.");
     }
   };
 
   return (
-    <div className="settings-container">
+    <div className="settings-page">
       <h1>Paramètres des Cryptos</h1>
-      <ul className="crypto-list">
-        {cryptos.map((crypto) => (
-          <li key={crypto.symbol} className="crypto-item">
-            <span>{crypto.symbol}</span>
-            <button
-              className={`toggle-btn ${crypto.is_active ? "active" : "inactive"}`}
-              onClick={() => handleToggle(crypto.symbol)}
-            >
-              {crypto.is_active ? "✔️ Activé" : "❌ Désactivé"}
-            </button>
-          </li>
-        ))}
-      </ul>
+      {error && <p className="error-message">{error}</p>}
+      {!user ? (
+        <p className="error-message">Utilisateur non trouvé</p>
+      ) : cryptos.length === 0 ? (
+        <p>Aucune crypto suivie.</p>
+      ) : (
+        <ul className="crypto-list">
+          {cryptos.map((crypto) => (
+            <li key={crypto.symbol} className="crypto-item">
+              <span>{crypto.symbol}</span>
+              <button
+                onClick={() => toggleCrypto(crypto)}
+                className={crypto.is_active ? "btn-active" : "btn-inactive"}
+              >
+                {crypto.is_active ? "Désactiver" : "Activer"}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+      <button className="back-btn" onClick={() => navigate("/dashboard")}>
+        Retour au Dashboard
+      </button>
     </div>
   );
 };
